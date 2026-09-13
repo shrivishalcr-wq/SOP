@@ -1,10 +1,8 @@
 /**
- * models/Rating.js
- * -----------------------------------------------------------------------
- * A resident's rating/review of a vendor. Vendor.AvgRating/RatingCount
- * are derived FROM this collection by services/ratingService.js - this
- * schema file stays free of that side-effect logic by design.
- * -----------------------------------------------------------------------
+ * @file Rating.js
+ * @description Mongoose model for vendor ratings.
+ * Stores resident ratings and reviews for vendors with 1-5 star scale.
+ * @module models/Rating
  */
 
 import mongoose from 'mongoose';
@@ -49,8 +47,6 @@ const RatingSchema = new Schema(
   { timestamps: false }
 );
 
-// A resident may rate a given vendor only once - app layer should
-// upsert (findOneAndUpdate) rather than blind-insert.
 RatingSchema.index({ Vendor_ID: 1, Resident_ID: 1 }, { unique: true });
 
 RatingSchema.virtual('Rating_ID').get(function () {

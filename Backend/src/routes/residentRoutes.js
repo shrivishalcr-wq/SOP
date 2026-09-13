@@ -1,21 +1,29 @@
 /**
- * routes/residentRoutes.js  *** NEW - ER-diagram alignment pass ***
- * -----------------------------------------------------------------------
- * Resident-facing routes. Currently just category preferences
- * (ResidentCategoryPreference), which backs the category half of
- * slide 12's "Category and Rating-based filtering" deliverable.
- * -----------------------------------------------------------------------
+ * @file residentRoutes.js
+ * @description Express router for resident API endpoints.
+ * Auth/profile routes are Firebase-token protected; everything derives the
+ * resident's identity from the verified token, never from a client-supplied id.
+ * @module routes/residentRoutes
  */
 
 import express from 'express';
 import { setPreferences, getPreferences } from '../controllers/residentPreferenceController.js';
+import {
+  syncResident,
+  getMyResidentProfile,
+  updateMyResidentProfile,
+  updateMyFcmToken,
+} from '../controllers/residentAuthController.js';
+import { requireResidentAuth, attachResident, requireOwnResident } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// PUT (not POST) - body is the resident's full desired preference set,
-// replacing whatever was there before. See controller comment for why.
-router.put('/:residentId/preferences', setPreferences);
+router.post('/auth/sync', requireResidentAuth, syncResident);
+router.get('/auth/me', requireResidentAuth, getMyResidentProfile);
+router.patch('/auth/me', requireResidentAuth, updateMyResidentProfile);
+router.patch('/auth/fcm-token', requireResidentAuth, updateMyFcmToken);
 
-router.get('/:residentId/preferences', getPreferences);
+router.put('/:residentId/preferences', requireResidentAuth, attachResident, requireOwnResident, setPreferences);
+router.get('/:residentId/preferences', requireResidentAuth, attachResident, requireOwnResident, getPreferences);
 
 export default router;

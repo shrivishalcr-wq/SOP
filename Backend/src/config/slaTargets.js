@@ -1,0 +1,18 @@
+/**
+ * @file slaTargets.js
+ * @description Service Level Agreement (SLA) target definitions.
+ * Defines performance targets for webhook processing, geospatial queries, and privacy thresholds.
+ * @module config/slaTargets
+ */
+
+export const SLA_TARGETS = Object.freeze({
+  WEBHOOK_PROCESSING_LATENCY_MS: 120,
+
+  GEOSPATIAL_QUERY_LATENCY_MS: 50,
+  GEOSPATIAL_QUERY_TEST_RADIUS_METERS: 500,
+
+  PRIVACY_TRUNCATION_MIN_METERS: 50,
+  PRIVACY_TRUNCATION_MAX_METERS: 100,
+
+  STORAGE_OVERHEAD_500_SESSIONS_MB: 15,
+});

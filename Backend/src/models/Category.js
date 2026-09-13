@@ -1,9 +1,8 @@
 /**
- * models/Category.js
- * -----------------------------------------------------------------------
- * Supporting lookup model referenced by Vendor.Category_ID
- * (e.g. "Vegetables", "Fruits", "Street Food").
- * -----------------------------------------------------------------------
+ * @file Category.js
+ * @description Mongoose model for vendor categories.
+ * Defines product/service categories for vendor classification (e.g., vegetables, snacks).
+ * @module models/Category
  */
 
 import mongoose from 'mongoose';

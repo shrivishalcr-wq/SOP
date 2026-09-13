@@ -1,11 +1,8 @@
 /**
- * models/VendorLocation.js
- * -----------------------------------------------------------------------
- * Current live location per vendor (one doc per vendor, upserted on every
- * WhatsApp Live Location ping). `geo` carries the 2dsphere index for
- * $near queries; `ExpiresAt` carries the TTL index for auto-expiry.
- * Unchanged from Weeks 1-2 aside from ESM syntax.
- * -----------------------------------------------------------------------
+ * @file VendorLocation.js
+ * @description Mongoose model for vendor geolocation data.
+ * Stores approximate vendor locations with GeoJSON indexing and TTL-based expiration.
+ * @module models/VendorLocation
  */
 
 import mongoose from 'mongoose';
@@ -24,7 +21,6 @@ const VendorLocationSchema = new Schema(
       index: true,
     },
 
-    // GeoJSON Point: coordinates = [longitude, latitude]
     geo: {
       type: {
         type: String,
@@ -53,7 +49,6 @@ const VendorLocationSchema = new Schema(
       default: Date.now,
     },
 
-    // TTL anchor - reset to (now + LOCATION_TTL_MINUTES) on every ping.
     ExpiresAt: {
       type: Date,
       required: true,

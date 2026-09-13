@@ -1,11 +1,8 @@
 /**
- * models/Vendor.js
- * -----------------------------------------------------------------------
- * Static vendor profile. Live location lives separately in
- * VendorLocation.js so fast-changing geo data doesn't rewrite this doc.
- * AvgRating/RatingCount are denormalized here and kept in sync by
- * services/ratingService.js whenever a Rating is written (Week 4).
- * -----------------------------------------------------------------------
+ * @file Vendor.js
+ * @description Mongoose model for vendor accounts.
+ * Stores vendor profile information, status, ratings, and category assignment.
+ * @module models/Vendor
  */
 
 import mongoose from 'mongoose';
@@ -41,8 +38,6 @@ const VendorSchema = new Schema(
       index: true,
     },
 
-    // Denormalized - recalculated by ratingService.recalculateAvgRating()
-    // every time a Rating is inserted/updated (Week 4 aggregation trigger).
     AvgRating: {
       type: Number,
       min: 0,

@@ -1,8 +1,8 @@
 /**
- * routes/alertRoutes.js
- * -----------------------------------------------------------------------
- * Manual/admin alert-testing endpoint. See controllers/alertController.js.
- * -----------------------------------------------------------------------
+ * @file alertRoutes.js
+ * @description Express router for alert API endpoints.
+ * Defines routes for creating proximity alerts between vendors and residents.
+ * @module routes/alertRoutes
  */
 
 import express from 'express';
